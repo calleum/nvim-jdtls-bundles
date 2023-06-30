@@ -7,8 +7,8 @@ from urllib.request import urlopen
 from zipfile import ZipFile
 
 java_pde_version = '0.8.0'
-java_debug_version = '0.49.0'
-java_test_version = '0.38.1'
+java_debug_version = '0.51.0'
+java_test_version = '0.39.0'
 
 def download_and_unzip(url, output_directory):
     resp = urlopen(url)
