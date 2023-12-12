@@ -7,8 +7,11 @@ from urllib.request import urlopen
 from zipfile import ZipFile
 
 java_pde_version = '0.8.0'
-java_debug_version = '0.51.0'
-java_test_version = '0.39.0'
+java_debug_version = '0.52.0'
+java_test_version = '0.40.1'
+# Microsoft has stopped releasing the vsix package for the test plugin.
+# See https://github.com/mason-org/mason-registry/issues/3036
+use_alternate_test_url = True
 
 def download_and_unzip(url, output_directory):
     resp = urlopen(url)
@@ -62,8 +65,11 @@ if __name__ == '__main__':
         )
     if args.java_test:
         version = java_test_version
+        url = f'https://github.com/microsoft/vscode-java-test/releases/download/{version}/vscjava.vscode-java-test-{version}.vsix'
+        if use_alternate_test_url:
+            url = f'https://github.com/nvim-java/vscode-java-test-releases/releases/download/{version}/artifacts.zip'
         download_and_unzip(
-            f'https://github.com/microsoft/vscode-java-test/releases/download/{version}/vscjava.vscode-java-test-{version}.vsix',
+            url,
             bundles / 'java-test'
         )
 
